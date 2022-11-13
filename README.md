@@ -1,6 +1,8 @@
 ## Reconstructing phylogenetic trees from genome-wide somatic mutations in clonal samples
 
-The R script in this repository 
+The R script in this repository takes in matrices of variant depth and total depth across from multiple clonal samples of the same donor, filters out germline and artefactual variants, constructs the phylogenetic tree topology and maps somatic mutations to the tree branches using the [TreeMut](https://github.com/nangalialab/treemut) package. 
+
+For any queries, raise an issue on the GitHub page or email Tim Coorens (tcoorens@broadinstitute.org) or Mike Spencer Chapman (ms56@sanger.ac.uk).
 
 ### Installation
 
@@ -132,10 +134,11 @@ Options:
 	-h, --help
 		Show this help message and exit
 ```
-
 ### Examples
 
+This command reproduces the results presented in the accompanying paper. The output files can also be found in the 'output' folder. Note that in order to use the "plot_spectra" feature, a path to the reference genome needs to be provided (`--genomeFile`). For the listed input, this is hg19/GRCh37. 
+
 ```
-Rscript build_phylogeny.R -c PD45567.snp.tsv -i PD45567 --exclude_samples PD45637b,PD45567f -m T
+Rscript build_phylogeny.R -c PD45567.snp.tsv -i PD45567 --exclude_samples PD45637b,PD45567f -m T --plot_spectra T --max_muts_plot 100000
 
 ```
