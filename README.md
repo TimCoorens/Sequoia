@@ -140,5 +140,4 @@ This command reproduces the results presented in the accompanying paper. The out
 
 ```
 Rscript build_phylogeny.R -c PD45567.snp.tsv -i PD45567 --exclude_samples PD45637b,PD45567f -m T --plot_spectra T --max_muts_plot 100000
-
 ```
