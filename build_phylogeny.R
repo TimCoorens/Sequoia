@@ -104,7 +104,7 @@ for(package in bioconductor_packages){
   }
 }
 if(!require("treemut", character.only=T,quietly = T, warn.conflicts = F)){
-  install_git("https://github.com/nangalialab/treemut")
+  install_git("https://github.com/NickWilliamsSanger/treemut")
   library("treemut",character.only=T,quietly = T, warn.conflicts = F)
 }
 
@@ -533,6 +533,7 @@ noCNVs=!samples%in%samples_with_CNVs
 #----------------------------------
 # Filtering
 #----------------------------------
+system(paste0("mkdir -p ",output_dir))
 print("Starting filtering...")
 
 filter_df=as.data.frame(matrix(ncol=4,unlist(strsplit(rownames(NV),split="_")),byrow = T))
@@ -883,5 +884,6 @@ Mutations_per_branch=Mutations_per_branch[res$summary$p_else_where<tree_mut_pval
 Mutations_per_branch$Patient = patient_ID
 Mutations_per_branch$SampleID = paste(patient_ID,Mutations_per_branch$Branch,sep="_")
 write.table(Mutations_per_branch,paste0(output_dir,patient_ID,"_",mut_id,"_assigned_to_branches.txt"),quote=F,row.names=F,sep="\t")
+
 
 
