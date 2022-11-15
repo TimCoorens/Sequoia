@@ -772,7 +772,6 @@ write.fasta(dna_strings, names=names(dna_strings),paste0(output_dir,patient_ID,"
 #----------------------------------
 print("Building a tree...")
 
-path_to_mpboot=""
 system(paste0(path_to_mpboot,"mpboot -s ",output_dir,patient_ID,"_",mut_id,"_for_MPBoot.fa -bb 1000"),ignore.stdout = T)
 
 #----------------------------------
