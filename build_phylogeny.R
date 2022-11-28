@@ -533,7 +533,7 @@ noCNVs=!samples%in%samples_with_CNVs
 #----------------------------------
 # Filtering
 #----------------------------------
-system(paste0("mkdir -p ",output_dir))
+if(!is.null(output_dir)) system(paste0("mkdir -p ",output_dir))
 print("Starting filtering...")
 
 filter_df=as.data.frame(matrix(ncol=4,unlist(strsplit(rownames(NV),split="_")),byrow = T))
