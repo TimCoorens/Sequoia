@@ -375,40 +375,43 @@ binom_pval_matrix = function(NV,NR,gender,qval_return=F) {
   }
 }
 
+
 apply_mix_model=function(NV,NR,plot=T,prop_cutoff=0.15){
   peak_VAF=rep(0,ncol(NV))
   names(peak_VAF)=colnames(NV)
   autosomal=!grepl("X|Y",rownames(NV))
   for(s in colnames(NV)){
     muts_include=NV[,s]>3&autosomal
-    NV_vec=NV[muts_include,s]
-    NR_vec=NR[muts_include,s]
-    res=binom_mix(NV_vec,NR_vec,mode="Truncated",nrange=1:3)
-    saveRDS(res,paste0(output_dir,s,"_binom_mix.Rdata"))
-    
-    if(plot){
-      pdf(paste0(output_dir,s,"_binom_mix.pdf"))
-      p=hist(NV_vec/NR_vec,breaks=20,xlim=c(0,1),col='gray',freq=F,xlab="Variant Allele Frequency",
-             main=paste0(s,", (n=",length(NV_vec),")"))
-      cols=c("red","blue","green","magenta","cyan")
+    if(sum(muts_include)>5){
+      NV_vec=NV[muts_include,s]
+      NR_vec=NR[muts_include,s]
+      res=binom_mix(NV_vec,NR_vec,mode="Truncated",nrange=1:3)
+      saveRDS(res,paste0(output_dir,s,"_binom_mix.Rdata"))
       
-      y_coord=max(p$density)-0.5
-      y_intv=y_coord/5
-      
-      for (i in 1:res$n){
-        depth=rpois(n=5000,lambda=median(NR_vec))
-        sim_NV=unlist(lapply(depth,rbinom,n=1,prob=res$p[i]))
-        sim_VAF=sim_NV/depth
-        sim_VAF=sim_VAF[sim_NV>3]
-        dens=density(sim_VAF)
-        lines(x=dens$x,y=res$prop[i]*dens$y,lwd=2,lty='dashed',col=cols[i])
-        y_coord=y_coord-y_intv/2
-        text(y=y_coord,x=0.9,label=paste0("p1: ",round(res$p[i],digits=2)))
-        segments(lwd=2,lty='dashed',col=cols[i],y0=y_coord+y_intv/4,x0=0.85,x1=0.95)
+      if(plot){
+        pdf(paste0(output_dir,s,"_binom_mix.pdf"))
+        p=hist(NV_vec/NR_vec,breaks=20,xlim=c(0,1),col='gray',freq=F,xlab="Variant Allele Frequency",
+               main=paste0(s,", (n=",length(NV_vec),")"))
+        cols=c("red","blue","green","magenta","cyan")
+        
+        y_coord=max(p$density)-0.5
+        y_intv=y_coord/5
+        
+        for (i in 1:res$n){
+          depth=rpois(n=5000,lambda=median(NR_vec))
+          sim_NV=unlist(lapply(depth,rbinom,n=1,prob=res$p[i]))
+          sim_VAF=sim_NV/depth
+          sim_VAF=sim_VAF[sim_NV>3]
+          dens=density(sim_VAF)
+          lines(x=dens$x,y=res$prop[i]*dens$y,lwd=2,lty='dashed',col=cols[i])
+          y_coord=y_coord-y_intv/2
+          text(y=y_coord,x=0.9,label=paste0("p1: ",round(res$p[i],digits=2)))
+          segments(lwd=2,lty='dashed',col=cols[i],y0=y_coord+y_intv/4,x0=0.85,x1=0.95)
+        }
+        dev.off()
       }
-      dev.off()
+      peak_VAF[s]=max(res$p[res$prop>prop_cutoff])
     }
-    peak_VAF[s]=max(res$p[res$prop>prop_cutoff])
   }
   return(peak_VAF)
 }
