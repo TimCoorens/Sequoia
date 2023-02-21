@@ -27,6 +27,7 @@ option_list = list(
   make_option(c("--vaf_absent"), action="store", default=0.1, type='numeric', help="VAF threshold (autosomal) below which a variant is absent"),
   make_option(c("--vaf_present"), action="store", default=0.3, type='numeric', help="VAF threshold (autosomal) above which a variant is present"),
   make_option(c("-m", "--mixmodel"), action="store", default=F, type='logical', help="Use a binomial mixture model to filter out non-clonal samples?"),
+  make_option(c("--min_clonal_mut"), action="store", default=20, type='numeric', help="If using binomial mixture model, minimum number of clonal mutations (in cluster higher than --VAF_treshold_mixmodel) needed to include sample."),
   make_option(c("-t", "--tree_mut_pval"), action="store", default=0.01, type='numeric', help="Pval threshold for treemut's mutation assignment"),
   make_option(c("-g", "--genotype_conv_prob"), action="store", default=F, type='logical', help="Use a binomial mixture model to filter out non-clonal samples?"),
   make_option(c("-p", "--min_pval_for_true_somatic"), action="store", default=0.05, type='numeric', help="Pval threshold for somatic presence if generating a probabilistic genotype matrix"),
@@ -81,6 +82,7 @@ tree_mut_pval=opt$tree_mut_pval
 beta_binom_shared=opt$b
 create_multi_tree=opt$create_multi_tree
 path_to_mpboot=opt$mpboot_path
+min_clonal_mut=opt$min_clonal_mut
 
 #----------------------------------
 # Load packages (install if they are not installed yet)
@@ -376,7 +378,7 @@ binom_pval_matrix = function(NV,NR,gender,qval_return=F) {
 }
 
 
-apply_mix_model=function(NV,NR,plot=T,prop_cutoff=0.15){
+apply_mix_model=function(NV,NR,plot=T,min_clonal_mut_num=min_clonal_mut){
   peak_VAF=rep(0,ncol(NV))
   names(peak_VAF)=colnames(NV)
   autosomal=!grepl("X|Y",rownames(NV))
@@ -410,7 +412,7 @@ apply_mix_model=function(NV,NR,plot=T,prop_cutoff=0.15){
         }
         dev.off()
       }
-      peak_VAF[s]=max(res$p[res$prop>prop_cutoff])
+      peak_VAF[s]=max(res$p[(res$prop*length(res$Which_cluster))>min_clonal_mut])
     }
   }
   return(peak_VAF)
@@ -498,11 +500,11 @@ if(!is.null(cgpvaf_paths)){
     NR = fread(nr_path,data.table=F)
     rownames(NR)=NR[,1]
     NR=NR[,-1]
-    
+    NR=NR[,!colnames(NR)%in%samples_exclude]
     NV = fread(nv_path,data.table=F)
     rownames(NV)=NV[,1]
     NV=NV[,-1]
-    
+    NV=NV[,!colnames(NV)%in%samples_exclude]
     samples=colnames(NV)
     Muts=rownames(NV)
   }else{
