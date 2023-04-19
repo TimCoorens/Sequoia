@@ -1,0 +1,123 @@
+MPBoot 1.1.0 built Mar 23 2018
+
+Input file name: mutect2_tree/PD45567_snv_for_MPBoot.fa
+Type of analysis: Parsimony tree reconstruction + MPBoot bootstrap approximation (1000 replicates)
+Random seed number: 569364
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 20 sequences with 16594 nucleotide sites
+Number of constant sites: 15738 (= 94.8415% of all sites)
+Number of site patterns: 230
+
+MAXIMUM PARSIMONY TREE
+-----------------------
+
+NOTE: Tree is UNROOTED although outgroup taxon 'Ancestral' is drawn at root
+Numbers in parentheses are  ultrafast bootstrap supports (%)
+
++--Ancestral
+|
+|        +--PD45567b_lo0003
+|     +--| (95)
+|     |  +--PD45567b_lo0012
+|  +--| (100)
+|  |  |     +--PD45567b_lo0004
+|  |  |  +--| (100)
+|  |  |  |  +--PD45567b_lo0005
+|  |  +--| (100)
+|  |     +--PD45567b_lo0007
++--| (100)
+|  |        +--PD45567c_lo0003
+|  |     +--| (51)
+|  |     |  +--PD45567c_lo0006
+|  |  +--| (100)
+|  |  |  +--PD45567c_lo0007
+|  +--| (100)
+|     +--PD45567c_lo0009
+|
+|        +--PD45567d_lo0003
+|     +--| (99)
+|     |  +--PD45567d_lo0030
+|  +--| (100)
+|  |  |  +--PD45567d_lo0023
+|  |  +--| (100)
+|  |     |     +--PD45567d_lo0029
+|  |     |  +--| (100)
+|  |     |  |  +--PD45567d_lo0037
+|  |     +--| (100)
+|  |        +--PD45567d_lo0033
++--| (100)
+   |     +--PD45567e_lo0002
+   |  +--| (98)
+   |  |  +--PD45567e_lo0008
+   +--| (100)
+      |  +--PD45567e_lo0009
+      +--| (100)
+         +--PD45567e_lo0011
+
+Parsimony score of the tree: 880
+Tree in newick format:
+
+(Ancestral,(((PD45567b_lo0003,PD45567b_lo0012)95,((PD45567b_lo0004,PD45567b_lo0005)100,PD45567b_lo0007)100)100,(((PD45567c_lo0003,PD45567c_lo0006)51,PD45567c_lo0007)100,PD45567c_lo0009)100)100,(((PD45567d_lo0003,PD45567d_lo0030)99,(PD45567d_lo0023,((PD45567d_lo0029,PD45567d_lo0037)100,PD45567d_lo0033)100)100)100,((PD45567e_lo0002,PD45567e_lo0008)98,(PD45567e_lo0009,PD45567e_lo0011)100)100)100);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 1000 bootstrap trees
+Branches with bootstrap support >0.000000% are kept (extended consensus)
+Numbers in parentheses are bootstrap supports (%)
+
++--Ancestral
+|
+|        +--PD45567b_lo0003
+|     +--| (95)
+|     |  +--PD45567b_lo0012
+|  +--| (100)
+|  |  |     +--PD45567b_lo0004
+|  |  |  +--| (100)
+|  |  |  |  +--PD45567b_lo0005
+|  |  +--| (100)
+|  |     +--PD45567b_lo0007
++--| (100)
+|  |        +--PD45567c_lo0003
+|  |     +--| (51)
+|  |     |  +--PD45567c_lo0006
+|  |  +--| (100)
+|  |  |  +--PD45567c_lo0007
+|  +--| (100)
+|     +--PD45567c_lo0009
+|
+|        +--PD45567d_lo0003
+|     +--| (99)
+|     |  +--PD45567d_lo0030
+|  +--| (100)
+|  |  |  +--PD45567d_lo0023
+|  |  +--| (100)
+|  |     |     +--PD45567d_lo0029
+|  |     |  +--| (100)
+|  |     |  |  +--PD45567d_lo0037
+|  |     +--| (100)
+|  |        +--PD45567d_lo0033
++--| (100)
+   |     +--PD45567e_lo0002
+   |  +--| (98)
+   |  |  +--PD45567e_lo0008
+   +--| (100)
+      |  +--PD45567e_lo0009
+      +--| (100)
+         +--PD45567e_lo0011
+
+
+Consensus tree in newick format: 
+
+(Ancestral,(((PD45567b_lo0003,PD45567b_lo0012)95,((PD45567b_lo0004,PD45567b_lo0005)100,PD45567b_lo0007)100)100,(((PD45567c_lo0003,PD45567c_lo0006)51,PD45567c_lo0007)100,PD45567c_lo0009)100)100,(((PD45567d_lo0003,PD45567d_lo0030)99,(PD45567d_lo0023,((PD45567d_lo0029,PD45567d_lo0037)100,PD45567d_lo0033)100)100)100,((PD45567e_lo0002,PD45567e_lo0008)98,(PD45567e_lo0009,PD45567e_lo0011)100)100)100);
+
+TIME STAMP
+----------
+
+Date and time: Tue Feb 21 20:08:37 2023
+Total CPU time used: 13.8606 seconds (0h:0m:13s)
+Total wall-clock time used: 14.1534 seconds (0h:0m:14s)
+
