@@ -27,7 +27,7 @@ option_list = list(
   make_option(c("--vaf_absent"), action="store", default=0.1, type='numeric', help="VAF threshold (autosomal) below which a variant is absent"),
   make_option(c("--vaf_present"), action="store", default=0.3, type='numeric', help="VAF threshold (autosomal) above which a variant is present"),
   make_option(c("-m", "--mixmodel"), action="store", default=F, type='logical', help="Use a binomial mixture model to filter out non-clonal samples?"),
-  make_option(c("--min_clonal_mut"), action="store", default=20, type='numeric', help="If using binomial mixture model, minimum number of clonal mutations (in cluster higher than --VAF_treshold_mixmodel) needed to include sample."),
+  make_option(c("--min_clonal_mut"), action="store", default=35, type='numeric', help="If using binomial mixture model, minimum number of clonal mutations (in cluster higher than --VAF_treshold_mixmodel) needed to include sample."),
   make_option(c("-t", "--tree_mut_pval"), action="store", default=0.01, type='numeric', help="Pval threshold for treemut's mutation assignment"),
   make_option(c("-g", "--genotype_conv_prob"), action="store", default=F, type='logical', help="Use a binomial mixture model to filter out non-clonal samples?"),
   make_option(c("-p", "--min_pval_for_true_somatic"), action="store", default=0.05, type='numeric', help="Pval threshold for somatic presence if generating a probabilistic genotype matrix"),
