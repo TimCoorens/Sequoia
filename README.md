@@ -138,6 +138,17 @@ Options:
 
 This command reproduces the results presented in the accompanying paper. The output files can also be found in the 'output' folder. Note that in order to use the "plot_spectra" feature, a path to the reference genome needs to be provided (`--genomeFile`). For the listed input, this is hg19/GRCh37. 
 
+CaVEMan:
 ```
 Rscript build_phylogeny.R -c PD45567.snp.tsv.gz -i PD45567 --exclude_samples PD45637b,PD45567f -m T --plot_spectra T --max_muts_plot 100000
 ```
+MuTect2:
+```
+Rscript build_phylogeny.R -r PD45567_NR_mutect2.tsv.gz -v PD45567_NV_mutect2.tsv.gz -i PD45567 --exclude_samples PD45637b,PD45567f -m T --plot_spectra T --max_muts_plot 100000
+```
+
+VarScan2:
+```
+Rscript build_phylogeny.R -r PD45567_NR_varscan2.tsv.gz -v PD45567_NV_varscan2.tsv.gz -i PD45567 --exclude_samples PD45637b,PD45567f --min_clonal_mut 20 -m T --plot_spectra T --max_muts_plot 100000
+```
+
