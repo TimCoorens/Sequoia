@@ -118,7 +118,7 @@ plot_spectrum = function(bed,save,add_to_title="",genomeFile = "/nfs/cancer_ref0
   mutations=as.data.frame(bed)
   colnames(mutations) = c("chr","pos","ref","mut")
   mutations$pos=as.numeric(mutations$pos)
-  mutations = mutations[(mutations$ref %in% c("A","C","G","T")) & (mutations$mut %in% c("A","C","G","T")) & mutations$chr %in% c(1:22,"X","Y"),]
+  mutations = mutations[(mutations$ref %in% c("A","C","G","T")) & (mutations$mut %in% c("A","C","G","T")) & mutations$chr %in% c(paste0("chr",c(1:22,"X","Y")),c(1:22,"X","Y")),]
   mutations$trinuc_ref = as.vector(scanFa(genomeFile, GRanges(mutations$chr, IRanges(as.numeric(mutations$pos)-1, 
                                                                                      as.numeric(mutations$pos)+1))))
   # 2. Annotating the mutation from the pyrimidine base
